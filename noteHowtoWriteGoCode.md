@@ -8,6 +8,13 @@
   * `export PATH=$PATH:$GOPATH/bin`
 * make directory to become the tree below
 * make `hello.go` and write the code
+* build the hello command (produce binary)
+  * `go install github.com/res0nanz/hello`
+    * Only `hello` directory is root directory, become `github.com/res0nanz/hello`
+  * or `cd $GOPATH/src/github.com/res0nanz/hello; go install`
+* run (the binary)
+  * `$GOPATH/bin/hello`
+  * or `hello`
 
 ```tree
 ~/workspaces/golang
@@ -24,14 +31,6 @@
 Q. Where is `.git` directory ?
 
 A. [Where to initialise git in Go project - Stack Overflow](https://stackoverflow.com/questions/29660362/where-to-initialise-git-in-go-project)
-
-* build the hello command (produce binary)
-  * `go install github.com/res0nanz/hello`
-    * Only `hello` directory is root directory, become `github.com/res0nanz/hello`
-  * or `cd $GOPATH/src/github.com/res0nanz/hello; go install`
-* run (the binary)
-  * `$GOPATH/bin/hello`
-  * or `hello`
 
 ## 1st library, Package name
 
@@ -68,6 +67,37 @@ A. [Where to initialise git in Go project - Stack Overflow](https://stackoverflo
     └── github.com
         └── res0nanz
             ├── hello
+            │   └── hello.go
+            └── stringutil
+                ├── reverse.go
+                └── reverse_test.go
+```
+
+## Remote Package
+
+* An import path describe how to get the package source using Git
+* Fetch, build, install package from remote: `go get "repository url"`
+  * If getting source from this repository, `go get github.com/res0nanz/learn-golang`
+* Use remote official package
+  * `go get github.com/golang/example` to get official repository
+  * rewrite import path in `hello.go`
+  * reisntall `get install github.com/res0nanz/hello`
+  * run `hello`
+
+```tree
+~/workspaces/golang
+├── bin
+│   └── hello
+└── src
+    └── github.com
+        ├── golang (official repository)
+        │   └── example
+        │       ├── stringutil
+        │       │   ├── reverse.go
+        │       │   └── reverse_test.go
+        │       └── etc.
+        └── res0nanz (in Github, repository name is "learn-golang")
+            ├── hell
             │   └── hello.go
             └── stringutil
                 ├── reverse.go
