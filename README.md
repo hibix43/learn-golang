@@ -13,3 +13,14 @@ Here is repository of outputs to learn golag
 
 * `go version go1.12 darwin/amd64`
 * [How to Write Go Code - The Go Programming Language](https://golang.org/doc/code.html)
+
+## How to Write Go Code
+
+* set $GOPATH
+* make directory following convention
+* `go install` to produce binary (run command)
+* `go build` to save compiled library cache
+* `go test` to check target source
+* When write a path, use github.com/...(don't use src and golag, etc.)
+  * Commands and sources follow above rule
+  * When run command at target package, commands doesn't need the path

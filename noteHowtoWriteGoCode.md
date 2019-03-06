@@ -1,5 +1,13 @@
 # Note - [How to Write Go Code - The Go Programming Language](https://golang.org/doc/code.html)
 
+## Overview
+
+* Keep all their Go code in a single workspace
+* A workspace contains version control (by Git)
+* Each repository contains one or more packages
+* Each package consists of one or more Go source files in a single directory
+* The path to a package's directory determines its import path
+
 ## Build Enviroment and 1st program
 
 * `brew install go`
