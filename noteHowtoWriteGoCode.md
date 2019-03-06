@@ -17,7 +17,6 @@
     └── github.com
         └── res0nanz(github-username, this repository)
             ├── .git
-            ├── README.md
             └── hello
                 └── hello.go
 ```
@@ -28,22 +27,49 @@ A. [Where to initialise git in Go project - Stack Overflow](https://stackoverflo
 
 * build the hello command (produce binary)
   * `go install github.com/res0nanz/hello`
+    * Only `hello` directory is root directory, become `github.com/res0nanz/hello`
   * or `cd $GOPATH/src/github.com/res0nanz/hello; go install`
-  * Only `hello` directory is root directory, become `github.com/res0nanz/hello`
 * run (the binary)
   * `$GOPATH/bin/hello`
   * or `hello`
 
-## 1st library
+## 1st library, Package name
 
 * `mkdir $GOPATH/src/github.com/res0nanz/stringutil`
-* write `stringutil.go`
+* write `reverse.go`
 * `go build (github.com/res0nanz/stringutil)`
   * No output file. It saves the compiled package in local cache
 * add `hello.go` import path (`github.com/res0nanz/stringutil`)
-  * In `hello.go`, use as `stringutil`
   * Only package name is `stringutil`
   * Package name: `package xxx (1st line in go file)`
+  * In `hello.go`, use as `stringutil`
   * ex) `stringutil.Reverse()`
 * re-install: `go install github.com/res0nanz/hello`
 * run new version: `hello`
+
+## Testing
+
+* Go has a lightweight test framework
+* test file
+  * Test file name checking `xxx.go` is `xxx_test.go`
+  * The file contain a function named `TestXXX`
+  * That function's argument is `t *testing.T`
+  * In the function, call `t.Errror` or `t.Fail` to cause fail
+* make `reverse_test.go` for `stringutil.go`'s `Reverse` function
+  * put `reverse_test.go` in `stringutil` directory
+* Run test: `go test (github.com/res0nanz/stringutil)`
+  * No need to type file name because follow Go rules
+
+```tree
+~/workspaces/golang
+├── bin
+│   └── hello
+└── src
+    └── github.com
+        └── res0nanz
+            ├── hello
+            │   └── hello.go
+            └── stringutil
+                ├── reverse.go
+                └── reverse_test.go
+```
