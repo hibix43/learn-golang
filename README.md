@@ -13,6 +13,7 @@ Here is repository of outputs to learn golag
 
 * `go version go1.12 darwin/amd64`
 * [How to Write Go Code - The Go Programming Language](https://golang.org/doc/code.html)
+* [A Tour of Go](https://tour.golang.org/welcome/1)
 
 ## How to Write Go Code
 
