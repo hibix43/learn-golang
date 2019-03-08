@@ -53,7 +53,7 @@ func split(sum int) (x, y int) {
 var c, python, java bool
 ```
 
-Declare can include initial value. It need One initial value __per variables__.
+Declare can include initial value. It always need one initial value __per variables__.
 
 ```golang
 var i, j int = 1, 3
@@ -136,4 +136,113 @@ var u2 unit = unit(f) //ok
 ```golang
 const Pi = 3.14
 // const Pi := 3.14
+```
+
+## for
+
+`for` is only loop syntax in golang. `()` is unneed, `{}` is always required.
+
+```golang
+sum := 0
+for i := 0; i < 10; i++ {
+    sum += i
+}
+fmt.Println(sum)
+```
+
+It is how to use like "while".
+
+```golang
+sum := 1
+for ; sum < 1000; {
+    sum += sum
+}
+for sum < 1000 {
+    sum += sum
+}
+
+// forever loop
+for {
+}
+```
+
+## if
+
+```golang
+func sqrt(x float64) string {
+    if x < 0 {
+        return sqrt(-x) + "i"
+    }
+    return fmt.Sprint(math.Sqrt(x))
+}
+```
+
+`if` can start with a short statement. Use `v` inside of the else block.
+
+```golang
+func pow(x, n, lim float64) float64 {
+    if v := math.Pow(x, n); v < lim {
+        return v
+    } else {
+        fmt.Printf("%g >= %g\n", v, lim)
+    }
+    // don't use v
+    return lim
+}
+```
+
+## Exercise: Loops and Functions
+
+omission
+
+## switch
+
+Don't need write `break`. Automatically given.
+
+```golang
+switch os := runtime.GOOS; os {
+    case "darwin":
+        fmt.Println("OS X.")
+    case "linux":
+        fmt.Println("Linux.")
+    default:
+        fmt.Printf("%s.\n", os)
+}
+```
+
+`case`s condition can use variables and formulas in addition with constants.
+
+```golang
+today := time.Now().Weekday()
+switch time.Saturday {
+case today + 0:
+    fmt.Println("Today.")
+case today + 1:
+    fmt.Println("Tomorrow.")
+case today + 2:
+    fmt.Println("In two days.")
+default:
+    fmt.Println("Too far away.")
+```
+
+## defer
+
+`defer` is executed at the time functions is closed. But, evaluation is immediately.
+
+```golang
+func main() {
+    defer fmt.Println("world")
+    fmt.Println("hello")
+}
+```
+
+Execution of `defer` functions are pushed onto stack.
+
+```golang
+func main() {
+    for i := 0; i < 10; i++ {
+        defer fmt.Println(i)
+    }
+    fmt.Println("done")
+}
 ```
