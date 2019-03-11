@@ -191,10 +191,6 @@ func pow(x, n, lim float64) float64 {
 }
 ```
 
-## Exercise: Loops and Functions
-
-omission
-
 ## switch
 
 Don't need write `break`. Automatically given.
@@ -454,5 +450,122 @@ func main() {
 
     s = append(s, 2, 3, 4)
     printSlice(s) // len=5 cap=8 [0 1 2 3 4]
+}
+```
+
+## range
+
+`range` is `for` loop to arrays(, sclies, maps).
+
+Returned 1st value is index, 2nd is copy of element at that index.
+
+```golang
+var pow = [10]int{1, 2, 4, 8, 16, 32, 64, 128}
+func main() {
+    for i, v := range pow {
+        fmt.Printf("2**%d = %d\n", i, v)
+    }
+}
+```
+
+* `for i, _ := range` omit element.
+* `for _, v := range` omit index.
+* `for i := range` omit element.
+
+## maps
+
+`map` connect keys with values. The zero value is `nil`.
+
+`make` function returns a map of the given type.
+
+```golang
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m map[string]Vertex // declares map has Vertex type
+
+func main() {
+    m = make(map[string]Vertex) // store map to m
+    m["Bell Labs"] = Vertex{
+        40.68433, -74.39967, // set 1st element
+    }
+    fmt.Println(m["Bell Labs"])
+}
+```
+
+Declare and set elements.
+
+```golang
+var m = map[string]Vertex{
+    "Bell Labs": Vertex{
+        40.68433, -74.39967,
+    },
+    "Google": Vertex{
+        37.42202, -122.08408,
+    },
+}
+```
+
+If the top-level type is just a type name, can write like follow.
+
+```golang
+var m = map[string]Vertex{
+    "Bell Labs": {40.68433, -74.39967},
+    "Google":    {37.42202, -122.08408},
+}
+```
+
+* Insert or update: `m[key] = elem`
+* Retrieve: `elem = m[key]`
+* Delete: `delete(m, key)`
+* Test: `elem, ok = m[key]`
+  * key is in m, ok is true. If not, ok is false
+  * If key is not in m, elem is zero value of maps type
+  * If elem or ok haven't declared, can use `elem, ok := m[key]`
+
+## function values
+
+Functions are values too.
+
+* `compute()` is given fn function as argument. run the function by 5 and 12
+* `hypot()` is typical function run Sqrt() by x and y
+* `compute(hypot)` run `hypot` by 5 and 12
+
+```golang
+func compute(fn func(float64, float64) float64) float64 {
+    return fn(5, 12)
+}
+func main() {
+    hypot := func(x, y float64) float64 {
+        return math.Sqrt(x*x + y*y)
+    }
+    fmt.Println(hypot(5, 12)) // 13
+
+    fmt.Println(compute(hypot)) // 13
+    fmt.Println(compute(math.Pow))// 2.44140625e+08
+}
+```
+
+* adder() return func()
+* func() is given x as argument and return int value
+* That's why adder() return int value
+
+```golang
+func adder() func(int) int {
+    sum := 0
+    return func(x int) int {
+        sum += x
+        return sum
+    }
+}
+func main() {
+    pos, neg := adder(), adder()
+    for i := 0; i < 10; i++ {
+        fmt.Println(
+            pos(i),
+            neg(-2*i),
+        )
+    }
 }
 ```

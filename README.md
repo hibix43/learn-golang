@@ -25,3 +25,11 @@ Here is repository of outputs to learn golag
 * When write a path, use github.com/...(don't use src and golag, etc.)
   * Commands and sources follow above rule
   * When run command at target package, commands doesn't need the path
+
+## A Tour of Go
+
+* Omission
+  * Exercise: Loops and Functions
+  * Exercise: Slices
+  * Exercise: Maps
+  * Exercise: Fibonacci closure
